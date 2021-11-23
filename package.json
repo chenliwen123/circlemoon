@@ -1,0 +1,22 @@
+{
+  "name": "circlemoon",
+  "version": "1.0.0",
+  "description": "移动端圈阅",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenliwen123/circlemoon.git"
+  },
+  "keywords": [
+    "圈阅"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chenliwen123/circlemoon/issues"
+  },
+  "homepage": "https://github.com/chenliwen123/circlemoon#readme"
+}
