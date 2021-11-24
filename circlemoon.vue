@@ -5,7 +5,7 @@
       <div class="cbody">
         <canvas id="canvas" ref="canvas">Canvas画板</canvas>
         <div class="autograph">
-          <img :src="url" width="80" id="qianming123" height="50" alt />
+          <img :src="imgurl" width="80" id="qianming123" height="50" alt />
         </div>
       </div>
       <div class="cfooter">
@@ -55,8 +55,6 @@
 import {enableUndo} from 'undo-canvas'
 var draw,tempbindfun,eraserfunbind;
 var preHandler = function(e) {
-  console.log(2)
-  // e.preventDefault();
 };
 class Draw {
   constructor(el) {
@@ -192,6 +190,10 @@ export default {
       type:Boolean,
       default:false
     },
+    imgurl:{
+      type:String,
+      default:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAyCAYAAADLLVz8AAAAAXNSR0IArs4c6QAAAxpJREFUaEPtmD2sTkEQhp9b0mokREQjKq2EGoWKQoFKIaG6hUoQRKVQSSgkEhQKotWTKESvU1CqtTLJGVmb852d3ffIvcV8zU1uzuzuPPPOz+4W+ZMIbEnWaUwCFEWQABOgSEA0TwUmQJGAaJ4KTIAiAdE8FZgARQKieSowAYoERPPdrMDbk28PRB/d/CjwBrgBfFppzf9yF94DPAZ+AqPO2xqngffAHWGdktNB4BFwDLgIfFsDYo8CHcy1auNnwDbwe/r/mpG+BNxc0eF9wOtJgaPB/cf9EYC2gAGz35zSok67M2dEJXwAbM/rwH1xLTcPq14BeKioKYeBVx2HP7VmHZrZN1pG/DsXhWdR2BUF4HngyhT9X9OOJ4EnAylndtY0TEm+1iYnoiXC1jtQlZd6TTmlRwHeAh5WjaKO5t6p3ryc/i5F1cCZgiPK9G9baRYJpn3zMbjv7PlHAT4FXlQjQa0Mj24EoH/7vaEYD9KJgMoj6jKVGsSI8lcF+BWwFC43rg/TA9AOZ/YXGmA8SJ8boN1ZO19dZuq50EYb68xDP1WBb6cZrbejzqWqp9PlBYd6Ut2ALKlQVp9tMArQxhhT4NKM1qvAVhp7+lrH70m5uTon1z6XqwLQm4Rdi+aG0l6ArTT29HXV96RcWR7Mzq50UuquAdAH6XKGMievAneBsgu/A+4BzxtXKE/RuTTuTd8ScF1ilspET2CkFLahs5y1aqAlwC9T1FvFf1OTaKV3xGkPgH3rt5fWzNlcV0lhB+aPBq0uHBkrNtW5SIPZ5Kzvu3/q8J7CxwFZiSMAy8cEj+TZmYYyVwMjxduUcm5a7wcw2jzKtF0qCQY0MsCvOgeWry9+UGsk5TvbpiZigI50PFE59NbNo5z9/F4eAVOmdnSPvzBHFFg2jaUa4fVsU7crD96sNY0PTGEWFHuNqZ/XomuXig2DXBug1cHySWnUmajTO/5dD8AdP+xuPEACFKOSABOgSEA0TwUmQJGAaJ4KTIAiAdE8FZgARQKieSowAYoERPNUYAIUCYjmqcAEKBIQzVOBCVAkIJr/AcVo4TMd95+QAAAAAElFTkSuQmCC'
+    }
   },
   name: 'circlemoon',
   watch:{
@@ -223,7 +225,6 @@ export default {
       colors:['#1c1c1c','#feff0a','#ffa109','#f16707','#ff0103','#ff00f6','#9914e4','#0e00f3','#00ff0b'],
       domwidth:'',
       domheight:'',
-      url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAyCAYAAADLLVz8AAAAAXNSR0IArs4c6QAAAxpJREFUaEPtmD2sTkEQhp9b0mokREQjKq2EGoWKQoFKIaG6hUoQRKVQSSgkEhQKotWTKESvU1CqtTLJGVmb852d3ffIvcV8zU1uzuzuPPPOz+4W+ZMIbEnWaUwCFEWQABOgSEA0TwUmQJGAaJ4KTIAiAdE8FZgARQKieSowAYoERPPdrMDbk28PRB/d/CjwBrgBfFppzf9yF94DPAZ+AqPO2xqngffAHWGdktNB4BFwDLgIfFsDYo8CHcy1auNnwDbwe/r/mpG+BNxc0eF9wOtJgaPB/cf9EYC2gAGz35zSok67M2dEJXwAbM/rwH1xLTcPq14BeKioKYeBVx2HP7VmHZrZN1pG/DsXhWdR2BUF4HngyhT9X9OOJ4EnAylndtY0TEm+1iYnoiXC1jtQlZd6TTmlRwHeAh5WjaKO5t6p3ryc/i5F1cCZgiPK9G9baRYJpn3zMbjv7PlHAT4FXlQjQa0Mj24EoH/7vaEYD9KJgMoj6jKVGsSI8lcF+BWwFC43rg/TA9AOZ/YXGmA8SJ8boN1ZO19dZuq50EYb68xDP1WBb6cZrbejzqWqp9PlBYd6Ut2ALKlQVp9tMArQxhhT4NKM1qvAVhp7+lrH70m5uTon1z6XqwLQm4Rdi+aG0l6ArTT29HXV96RcWR7Mzq50UuquAdAH6XKGMievAneBsgu/A+4BzxtXKE/RuTTuTd8ScF1ilspET2CkFLahs5y1aqAlwC9T1FvFf1OTaKV3xGkPgH3rt5fWzNlcV0lhB+aPBq0uHBkrNtW5SIPZ5Kzvu3/q8J7CxwFZiSMAy8cEj+TZmYYyVwMjxduUcm5a7wcw2jzKtF0qCQY0MsCvOgeWry9+UGsk5TvbpiZigI50PFE59NbNo5z9/F4eAVOmdnSPvzBHFFg2jaUa4fVsU7crD96sNY0PTGEWFHuNqZ/XomuXig2DXBug1cHySWnUmajTO/5dD8AdP+xuPEACFKOSABOgSEA0TwUmQJGAaJ4KTIAiAdE8FZgARQKieSowAYoERPNUYAIUCYjmqcAEKBIQzVOBCVAkIJr/AcVo4TMd95+QAAAAAElFTkSuQmCC",
     };
   },
 
@@ -267,8 +268,6 @@ export default {
     },
     save: function() {
       var data = draw.save.bind(this)();
-      this.url = data;
-      this.img = data
       return data
     },
   },

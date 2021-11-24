@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="index">
     <div id="myChart" :style="{width: '300px', height: '400px'}"></div>
     <circlemoon :dom="dom" v-model="show" ref="circlemoon">
       <div slot="header" class="ctop">
@@ -10,20 +10,14 @@
         <div class="top_right" @click="save">完成</div>
       </div>
     </circlemoon>
-    <div @click="show = true">
+    <div @click="show = true" class="textshow">
       展示弹出层
     </div>
-    <!-- <photo-editor :dom="dom" v-model="show" v-if="show"></photo-editor> -->
   </div>
 </template>
 
 <script>
-// let echarts = require('echarts/lib/echarts')
-// // 引入柱状图组件
-// require('echarts/lib/chart/bar')
-// require('echarts/lib/component/tooltip')
-// require('echarts/lib/component/title')
-import circlemoon from './circlemoon'
+import circlemoon from 'circlemoon/circlemoon.vue'
 export default {
   name: "index",
   components: {
@@ -72,7 +66,8 @@ export default {
 </script>
 
 <style lang="scss">
-.ctop{
+.index{
+  .ctop{
   display: flex;
   justify-content: space-between;
   margin-top:15px;
@@ -92,4 +87,10 @@ export default {
     color:#409EFF;
   }
 }
+ .textshow{
+   font-weight: 700;
+   font-size:28px;
+  }
+}
+
 </style>
