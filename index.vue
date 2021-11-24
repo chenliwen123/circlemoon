@@ -13,11 +13,12 @@
     <div @click="show = true" class="textshow">
       展示弹出层
     </div>
+    <img :src="newimg" alt="">
   </div>
 </template>
 
 <script>
-import circlemoon from 'circlemoon/circlemoon.vue'
+import circlemoon from 'circlemoon'
 export default {
   name: "index",
   components: {
@@ -29,7 +30,8 @@ export default {
   data() {
     return {
       dom:null,
-      show:false
+      show:false,
+      newimg:''
     };
   },
 
@@ -39,8 +41,9 @@ export default {
 
   methods: {
     save(){
-      let data = this.$refs.circlemoon.save()
-      console.log(data);
+      let data = this.$refs.circlemoon.save();
+      this.newimg = data
+      this.show = false
     },
     init(){
       let dom = document.getElementById('myChart')
@@ -89,7 +92,7 @@ export default {
 }
  .textshow{
    font-weight: 700;
-   font-size:28px;
+   font-size:40px;
   }
 }
 

@@ -173,8 +173,15 @@ class Draw {
     newCanvas.width = this.domwidth
     newCanvas.height = this.domheight
     const context = newCanvas.getContext('2d')
-    canvasList.forEach(item => {
-      context.drawImage(item, 0, 0, this.domwidth, this.domheight)
+    canvasList.forEach((item,index) => {
+      if(index == 1){
+        context.drawImage(item, 0, 0, item.offsetWidth, item.offsetHeight)
+      }else{
+        let info = item.getBoundingClientRect()
+        let cbody = document.querySelector('.cbody').getBoundingClientRect()
+        context.drawImage(item, info.left, info.top - cbody.top, item.offsetWidth, item.offsetHeight)
+      }
+      
     })
     return newCanvas.toDataURL('image/png')
   }
