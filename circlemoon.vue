@@ -211,7 +211,7 @@ export default {
           });
         });
       }else{
-        this.domparent.append(this.dom)
+        this.domparent.prepend(this.dom)
         this.activetype = ''
       }
     }
