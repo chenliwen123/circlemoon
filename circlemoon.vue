@@ -42,10 +42,6 @@
           <div class="colors">
             <div v-for="(item,index) in colors" :class="{active:index==activeindex}" :style="'background:'+item" :key="index" @click="uptatec(item,index)"></div>
           </div>
-          <!-- <div class="options">
-            <svg t="1631239808086" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2772" width="25" height="25"><path d="M896 812.9 594.2 511.1l301.2-301.2-82.3-82.3L511.9 428.8l-301-301L128.6 210.1l301 301L128 812.7l82.3 82.3 301.6-301.6 301.8 301.8L896 812.9zM896 812.9" p-id="2773"></path></svg>
-            <svg t="1631239764679" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2487" width="30" height="30"><path d="M416.832 798.08C400.64 798.08 384.512 791.872 372.16 779.52L119.424 525.76C94.784 500.992 94.784 460.8 119.424 436.032 144.128 411.264 184.128 411.264 208.768 436.032L416.832 644.928 814.4 245.76C839.04 220.928 879.04 220.928 903.744 245.76 928.384 270.528 928.384 310.656 903.744 335.424L461.504 779.52C449.152 791.872 432.96 798.08 416.832 798.08Z" p-id="2488"></path></svg>
-          </div> -->
         </div>
       </div>
       
@@ -119,7 +115,7 @@ class Draw {
       let row = self.textarea.value.split('\n');
       self.cxt.fillStyle = self.newcolor;
       row.forEach( (item,index) => {
-        self.cxt.fillText(item,self.textarea.offsetLeft-self.stage_info.left,self.textarea.offsetTop + (index*self.textarea.style.fontSize.split('px')[0]) - self.stage_info.top);
+        self.cxt.fillText(item,self.textarea.offsetLeft-self.stage_info.left,self.textarea.offsetTop + ((index+1)*self.textarea.style.fontSize.split('px')[0]) - self.stage_info.top);
       })
       self.textarea.value = ''
       self.cxt.putTag();
@@ -204,13 +200,9 @@ export default {
         this.$nextTick( () => {
           this.domparent = this.dom.parentElement
           document.querySelector('.cbody').append(this.dom)
-          this.domwidth = this.dom.offsetWidth
-          this.domheight = this.dom.offsetHeight
           let canvas = document.getElementById('canvas')
-          canvas.width = this.domwidth
-          canvas.height = this.domheight
-          // canvas.width = '100%';
-          // canvas.height = '100%';
+          this.domwidth = canvas.width = canvas.parentNode.offsetWidth;
+          this.domheight = canvas.height = canvas.parentNode.offsetHeight;
           this.$nextTick( () => {
             draw = new Draw("canvas");
             draw.init();
@@ -218,6 +210,7 @@ export default {
         });
       }else{
         this.domparent.append(this.dom)
+        this.activetype = ''
       }
     }
   },
@@ -300,7 +293,7 @@ export default {
       display:none;
       z-index:9999;
       background:transparent;
-      width:160px;
+      width:21.333vw;
     }
     #qianming123{
       display: none;
@@ -308,8 +301,10 @@ export default {
     .cbody{
       display:flex;
       justify-content:center;
+      align-items:center;
       position: relative;
       height: calc(100% - 40vw);
+      margin-bottom:39vw;
       overflow:auto;
       #canvas{
         z-index: 9;
@@ -334,17 +329,17 @@ export default {
       bottom: 0;
       .cfooter_top{
         display: flex;
-        width:calc(100% - 30px);
+        width:calc(100% - 4vw);
         justify-content: space-between;
-        margin:0 15px;
+        margin:0 2vw;
         .eraser{
-          width:50px;
-          height:50px;
+          width: 6.667vw;
+          height: 6.667vw;
           margin-left:0;
           background:#fff;
-          border-radius: 30px;
-          padding:6px 8px;
-          box-shadow: 0px 4px 20px #ddd;
+          border-radius: 4vw;
+          padding: 0.8vw 1.067vw;
+          box-shadow: 0px 0.533vw 2.667vw #ddd;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -352,13 +347,13 @@ export default {
         .operation_right{
           display: flex;
           span{
-            width:50px;
-            height:50px;
-            margin-left:15px;
+            width: 6.667vw;
+            height: 6.667vw;
+            margin-left:2vw;
             background:#fff;
-            border-radius: 30px;
-            padding:6px 8px;
-            box-shadow: 0px 4px 20px #ddd;
+            border-radius: 4vw;
+            padding: 0.8vw 1.067vw;
+            box-shadow: 0px 0.533vw 2.667vw #ddd;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -368,10 +363,10 @@ export default {
       .cfooter_bottom{
         display: flex;
         justify-content: space-around;
-        margin-top:40px;
+        margin-top:5.333vw;
         background: #fff;
         div{
-          padding:14px 0;
+          padding: 1.867vw 0;
           width: 100%;
           display: flex;
           justify-content: center;
@@ -379,7 +374,7 @@ export default {
           span{
             width:100%;
             text-align: center;
-            margin-top:5px;
+            margin-top:0.667vw;
           }
         }
       }
@@ -388,25 +383,18 @@ export default {
         flex-wrap: wrap;
         width:100%;
       }
-      .options{
-        display: flex;
-        justify-content: space-between;
-        align-items:center;
-        width:100%;
-        padding:0 20px;
-      }
       .colors{
         display: flex;
         width: 100%;
         align-items: center;
-        padding:10px 20px;
+        padding: 1.333vw 2.667vw;
         div{
-          height: 30px;
+          height: 4vw;
           width:100%;
           flex:5;
           &.active{
             flex:6;
-            height: 40px;
+            height: 5.333vw;
             border: 1px solid #9c9c9c;
           }
         }
